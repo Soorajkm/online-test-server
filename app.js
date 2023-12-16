@@ -31,6 +31,15 @@ app.use(cors());
 app.use(function (req, res, next) {
   next(createError(404));
 });
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*"); // Replace * with specific origins if needed
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, PATCH, DELETE"
+  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
 
 // error handler
 app.use(function (err, req, res, next) {
