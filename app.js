@@ -3,16 +3,16 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-var cors = require("cors");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var testRouter = require("./controller/test");
 var authRouter = require("./controller/auth");
+var cors = require("cors");
 
 var app = express();
-
-// view engine setup
+app.use(cors());
+//view engine setup
 //app.set("views", path.join(__dirname, "views"));
 //app.set("view engine", "jade");
 
@@ -26,19 +26,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/test", testRouter);
 app.use("/auth", authRouter);
-app.use((req, res, next) => {
-  res.setHaeader(Access - Control - Allow - Origin, "http://localhost:3000");
-  res.setHeader(
-    Access - Control - Allow - Methods,
-    "GET, POST, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    Access - Control - Allow - Headers,
-    "Content-Type, Authorization"
-  );
-  next();
-});
-app.use(cors());
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
